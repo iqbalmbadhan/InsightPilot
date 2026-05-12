@@ -13,11 +13,11 @@ const buttonVariants = cva(
         destructive:
           "bg-red-500 text-white hover:bg-red-500/90",
         outline:
-          "border border-zinc-700 bg-transparent hover:bg-zinc-800 hover:text-zinc-100 text-zinc-300",
+          "border border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:bg-transparent dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-100",
         secondary:
-          "bg-zinc-800 text-zinc-100 hover:bg-zinc-700",
+          "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700",
         ghost:
-          "hover:bg-zinc-800 hover:text-zinc-100 text-zinc-400",
+          "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

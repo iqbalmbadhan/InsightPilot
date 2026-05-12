@@ -41,12 +41,16 @@ export default function FileUpload({
         } else if (name.endsWith(".xlsx") || name.endsWith(".xls")) {
           result = await parseXLSXFile(file);
         } else {
-          throw new Error("Unsupported file type. Please upload a CSV or Excel file.");
+          throw new Error(
+            "Unsupported file type. Please upload a CSV or Excel file."
+          );
         }
 
         onParsed(result);
       } catch (err) {
-        onError(err instanceof Error ? err.message : "Failed to parse file");
+        onError(
+          err instanceof Error ? err.message : "Failed to parse file"
+        );
       } finally {
         setIsParsing(false);
       }
@@ -78,27 +82,28 @@ export default function FileUpload({
   if (parsed) {
     const icon =
       parsed.type === "xlsx" ? (
-        <FileSpreadsheet className="h-4 w-4 text-emerald-400" />
+        <FileSpreadsheet className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
       ) : (
-        <FileText className="h-4 w-4 text-emerald-400" />
+        <FileText className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
       );
 
     return (
-      <div className="flex items-center justify-between rounded-lg border border-emerald-800/50 bg-emerald-900/10 px-4 py-3">
+      <div className="flex items-center justify-between rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-800/50 dark:bg-emerald-900/10">
         <div className="flex items-center gap-2.5 min-w-0">
           {icon}
           <div className="min-w-0">
-            <p className="truncate font-mono text-sm text-zinc-200">
+            <p className="truncate font-mono text-sm text-zinc-800 dark:text-zinc-200">
               {parsed.fileName}
             </p>
             <p className="font-mono text-xs text-zinc-500">
-              {parsed.summary?.rowCount} rows · {parsed.summary?.columnCount} columns
+              {parsed.summary?.rowCount} rows ·{" "}
+              {parsed.summary?.columnCount} columns
             </p>
           </div>
         </div>
         <button
           onClick={onClear}
-          className="ml-3 shrink-0 rounded p-1 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 transition-colors"
+          className="ml-3 shrink-0 rounded p-1 text-zinc-400 hover:bg-zinc-200 hover:text-zinc-700 transition-colors dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
           aria-label="Remove file"
         >
           <X className="h-4 w-4" />
@@ -117,8 +122,8 @@ export default function FileUpload({
         className={cn(
           "relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed px-6 py-8 text-center transition-colors",
           isDragging
-            ? "border-emerald-500 bg-emerald-500/5"
-            : "border-zinc-700 bg-zinc-900/50 hover:border-zinc-600 hover:bg-zinc-900",
+            ? "border-emerald-400 bg-emerald-50 dark:border-emerald-500 dark:bg-emerald-500/5"
+            : "border-zinc-300 bg-zinc-50 hover:border-zinc-400 hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/50 dark:hover:border-zinc-600 dark:hover:bg-zinc-900",
           isParsing && "pointer-events-none opacity-60"
         )}
       >
@@ -132,21 +137,21 @@ export default function FileUpload({
 
         {isParsing ? (
           <div className="flex flex-col items-center gap-2">
-            <div className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-600 border-t-emerald-400" />
-            <p className="font-mono text-xs text-zinc-400">Parsing file…</p>
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-300 border-t-emerald-500 dark:border-zinc-600 dark:border-t-emerald-400" />
+            <p className="font-mono text-xs text-zinc-500">Parsing file…</p>
           </div>
         ) : (
           <>
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700">
-              <Upload className="h-5 w-5 text-zinc-400" />
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-800">
+              <Upload className="h-5 w-5 text-zinc-400 dark:text-zinc-400" />
             </div>
-            <p className="font-mono text-sm font-medium text-zinc-300">
+            <p className="font-mono text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Drop CSV / Excel here
             </p>
-            <p className="mt-1 font-mono text-xs text-zinc-500">
+            <p className="mt-1 font-mono text-xs text-zinc-400 dark:text-zinc-500">
               or click to browse
             </p>
-            <p className="mt-2 font-mono text-[11px] text-zinc-600">
+            <p className="mt-2 font-mono text-[11px] text-zinc-400 dark:text-zinc-600">
               .csv · .xlsx · .xls
             </p>
           </>
@@ -157,7 +162,7 @@ export default function FileUpload({
         variant="ghost"
         size="sm"
         onClick={onLoadExample}
-        className="w-full font-mono text-xs text-zinc-500 hover:text-zinc-300"
+        className="w-full font-mono text-xs"
       >
         Load example sales CSV
       </Button>

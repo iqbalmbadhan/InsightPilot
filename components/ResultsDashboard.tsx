@@ -31,10 +31,10 @@ export default function ResultsDashboard({
       {/* Results header */}
       <div className="flex items-center justify-between">
         <div className="space-y-0.5">
-          <h2 className="font-mono text-sm font-bold text-zinc-200 uppercase tracking-wide">
+          <h2 className="font-mono text-sm font-bold text-zinc-700 uppercase tracking-wide dark:text-zinc-200">
             Analysis Complete
           </h2>
-          <p className="font-mono text-xs text-zinc-500">
+          <p className="font-mono text-xs text-zinc-400 dark:text-zinc-500">
             {new Date(result.generatedAt).toLocaleString()}
             {fileName && ` · ${fileName}`}
           </p>
@@ -45,7 +45,7 @@ export default function ResultsDashboard({
             variant="ghost"
             size="sm"
             onClick={onReset}
-            className="gap-1.5 font-mono text-xs text-zinc-500 hover:text-zinc-300"
+            className="gap-1.5 font-mono text-xs"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             New
@@ -56,65 +56,50 @@ export default function ResultsDashboard({
       {/* Confidence bar */}
       <ConfidenceScore score={result.confidence} note={result.dataQualityNote} />
 
-      {/* Divider */}
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-zinc-800" />
-        <span className="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">
-          Insights
-        </span>
-        <div className="h-px flex-1 bg-zinc-800" />
-      </div>
-
-      {/* Insights */}
+      {/* Insights section */}
+      <SectionDivider label="Insights" />
       <div className="space-y-3">
         {result.insights.map((insight, i) => (
           <InsightCard key={insight.id} insight={insight} index={i} />
         ))}
       </div>
 
-      {/* Divider */}
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-zinc-800" />
-        <span className="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">
-          Risks
-        </span>
-        <div className="h-px flex-1 bg-zinc-800" />
-      </div>
-
-      {/* Risks */}
+      {/* Risks section */}
+      <SectionDivider label="Risks" />
       <div className="space-y-3">
         {result.risks.map((risk, i) => (
-          <RiskCard
-            key={risk.id}
-            risk={risk}
-            index={i}
-            delay={0.3 + i * 0.08}
-          />
+          <RiskCard key={risk.id} risk={risk} index={i} delay={0.3 + i * 0.08} />
         ))}
       </div>
 
-      {/* Divider */}
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-zinc-800" />
-        <span className="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">
-          Action
-        </span>
-        <div className="h-px flex-1 bg-zinc-800" />
-      </div>
-
-      {/* Action */}
+      {/* Action section */}
+      <SectionDivider label="Action" />
       <ActionCard action={result.action} delay={0.5} />
 
       {/* Data quality warning */}
       {result.dataQualityNote && (
-        <div className="flex items-start gap-2.5 rounded-lg border border-amber-900/30 bg-amber-900/10 px-3.5 py-3">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
-          <p className="font-mono text-xs text-amber-300/80 leading-relaxed">
-            <span className="font-semibold text-amber-300">Data note: </span>
+        <div className="flex items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 dark:border-amber-900/30 dark:bg-amber-900/10">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500 dark:text-amber-400" />
+          <p className="font-mono text-xs text-amber-700 leading-relaxed dark:text-amber-300/80">
+            <span className="font-semibold text-amber-800 dark:text-amber-300">
+              Data note:{" "}
+            </span>
             {result.dataQualityNote}
           </p>
         </div>
       )}
     </motion.div>
+  );
+}
+
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
+      <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest dark:text-zinc-600">
+        {label}
+      </span>
+      <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
+    </div>
   );
 }

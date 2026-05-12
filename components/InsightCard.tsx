@@ -55,11 +55,11 @@ export default function InsightCard({ insight, index }: InsightCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.08 }}
     >
-      <Card className="group hover:border-zinc-700 transition-colors">
+      <Card className="group hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
         <CardContent className="p-4">
           <div className="flex items-start gap-3">
             {/* Number badge */}
-            <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-900/40 border border-emerald-700/40 font-mono text-xs font-bold text-emerald-400">
+            <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-emerald-300 bg-emerald-50 font-mono text-xs font-bold text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-900/40 dark:text-emerald-400">
               {insight.id}
             </div>
 
@@ -71,14 +71,16 @@ export default function InsightCard({ insight, index }: InsightCardProps) {
               </Badge>
 
               {/* Insight text */}
-              <p className="text-sm leading-relaxed text-zinc-200">
+              <p className="text-sm leading-relaxed text-zinc-800 dark:text-zinc-200">
                 {insight.text}
               </p>
 
               {/* Signal */}
-              <div className="rounded border border-zinc-800 bg-zinc-950/50 px-2.5 py-1.5">
-                <p className="font-mono text-[11px] text-zinc-500 leading-relaxed">
-                  <span className="text-zinc-600">signal → </span>
+              <div className="rounded border border-zinc-200 bg-zinc-50 px-2.5 py-1.5 dark:border-zinc-800 dark:bg-zinc-950/50">
+                <p className="font-mono text-[11px] text-zinc-500 leading-relaxed dark:text-zinc-500">
+                  <span className="text-zinc-400 dark:text-zinc-600">
+                    signal →{" "}
+                  </span>
                   {insight.signal}
                 </p>
               </div>

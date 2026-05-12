@@ -38,7 +38,7 @@ export default function LoadingState() {
         {Array.from({ length: 16 }).map((_, i) => (
           <div
             key={i}
-            className="h-2 w-2 rounded-sm bg-emerald-500/30 animate-pulse"
+            className="h-2 w-2 rounded-sm bg-emerald-400/40 animate-pulse dark:bg-emerald-500/30"
             style={{ animationDelay: `${(i * 80) % 800}ms` }}
           />
         ))}
@@ -46,11 +46,13 @@ export default function LoadingState() {
 
       {/* Status text */}
       <div className="space-y-1 text-center">
-        <p className="font-mono text-sm text-zinc-300">
+        <p className="font-mono text-sm text-zinc-600 dark:text-zinc-300">
           {MESSAGES[msgIndex]}
-          <span className="inline-block w-5 text-left text-emerald-400">{dots}</span>
+          <span className="inline-block w-5 text-left text-emerald-600 dark:text-emerald-400">
+            {dots}
+          </span>
         </p>
-        <p className="font-mono text-xs text-zinc-600">
+        <p className="font-mono text-xs text-zinc-400 dark:text-zinc-600">
           AI analysis in progress
         </p>
       </div>

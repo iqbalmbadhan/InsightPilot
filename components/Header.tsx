@@ -12,19 +12,19 @@ export default function Header() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/95 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/95">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded bg-emerald-500/10 border border-emerald-500/30">
-              <Zap className="h-3.5 w-3.5 text-emerald-400" />
+              <Zap className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" />
             </div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-mono text-base font-bold tracking-tight text-zinc-100">
+              <span className="font-mono text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
                 InsightPilot
               </span>
-              <span className="hidden sm:inline-block rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">
+              <span className="hidden sm:inline-block rounded border border-zinc-300 bg-zinc-100 px-1.5 py-0.5 font-mono text-[10px] text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
                 v0.1
               </span>
             </div>
@@ -32,7 +32,7 @@ export default function Header() {
 
           {/* Tagline + Controls */}
           <div className="flex items-center gap-3">
-            <span className="hidden md:block font-mono text-xs text-zinc-500">
+            <span className="hidden md:block font-mono text-xs text-zinc-400 dark:text-zinc-500">
               Upload data. Get clarity.
             </span>
             {mounted && (
@@ -44,9 +44,9 @@ export default function Header() {
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
-                  <Sun className="h-4 w-4 text-zinc-400" />
+                  <Sun className="h-4 w-4" />
                 ) : (
-                  <Moon className="h-4 w-4 text-zinc-600" />
+                  <Moon className="h-4 w-4" />
                 )}
               </Button>
             )}
