@@ -1,0 +1,19 @@
+Month,Product,Category,Units Sold,Revenue,Returns,Inventory Level,Supplier,Lead Time (days),Notes
+Jan 2024,Widget Pro X200,Electronics,245,$48755,12,380,Shenzhen Mfg,45,Best seller
+Jan 2024,Basic Handle Kit,Hardware,89,$5340,3,120,LocalParts Co,14,
+Jan 2024,Premium Case A1,Accessories,156,$23400,8,200,Taiwan Tech,30,
+Feb 2024,Widget Pro X200,Electronics,198,$39402,18,220,Shenzhen Mfg,45,Returns spike - possible batch issue
+Feb 2024,Basic Handle Kit,Hardware,112,$6720,1,95,LocalParts Co,14,
+Feb 2024,Premium Case A1,Accessories,134,$20100,5,180,Taiwan Tech,30,
+Mar 2024,Widget Pro X200,Electronics,312,$62088,8,450,Shenzhen Mfg,45,Strong recovery
+Mar 2024,Basic Handle Kit,Hardware,78,$4680,2,85,LocalParts Co,14,Low stock - watch closely
+Mar 2024,Premium Case A1,Accessories,178,$26700,11,210,Taiwan Tech,30,Returns rising
+Apr 2024,Widget Pro X200,Electronics,267,$53133,9,410,Shenzhen Mfg,45,
+Apr 2024,Basic Handle Kit,Hardware,134,$8040,0,40,LocalParts Co,14,CRITICAL - reorder NOW
+Apr 2024,Premium Case A1,Accessories,201,$30150,7,160,Taiwan Tech,30,
+May 2024,Widget Pro X200,Electronics,289,$57522,11,350,Shenzhen Mfg,45,
+May 2024,Basic Handle Kit,Hardware,158,$9480,1,0,LocalParts Co,14,STOCKOUT - orders on hold
+May 2024,Premium Case A1,Accessories,189,$28350,14,120,Taiwan Tech,30,Returns accelerating
+Jun 2024,Widget Pro X200,Electronics,334,$66466,7,480,Shenzhen Mfg,45,New quarterly record
+Jun 2024,Basic Handle Kit,Hardware,201,$12060,0,145,LocalParts Co,14,Restock arrived - backorders cleared
+Jun 2024,Premium Case A1,Accessories,145,$21750,22,210,Taiwan Tech,30,High return rate - investigate quality
