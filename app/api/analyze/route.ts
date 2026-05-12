@@ -132,32 +132,79 @@ export async function POST(req: NextRequest) {
 
     const model = resolveModel();
 
+    // Some free models don't honour response_format — try without it first,
+    // fall back gracefully. Reasoning models also need <think> stripped.
+    const isReasoningModel =
+      model.includes("reasoning") ||
+      model.includes("deepseek-r") ||
+      model.includes("o1") ||
+      model.includes("o3") ||
+      model.includes("thinking");
+
+    const createParams: Parameters<typeof client.chat.completions.create>[0] =
+      {
+        model,
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: userPrompt },
+        ],
+        temperature: isReasoningModel ? 1 : 0.25, // reasoning models require temp=1
+        max_tokens: 2000,
+      };
+
+    // Only request json_object mode for non-reasoning models; many free/reasoning
+    // models on OpenRouter either ignore or error on this parameter
+    if (!isReasoningModel) {
+      createParams.response_format = { type: "json_object" };
+    }
+
     const completion = await client.chat.completions.create({
-      model,
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: userPrompt },
-      ],
-      response_format: { type: "json_object" },
-      temperature: 0.25,
-      max_tokens: 2000,
+      ...createParams,
+      stream: false,
     });
 
-    const raw = completion.choices[0]?.message?.content;
+    const rawContent = completion.choices[0]?.message?.content ?? "";
 
-    if (!raw) {
+    if (!rawContent.trim()) {
       return NextResponse.json(
-        { error: "AI returned an empty response. Please try again." },
+        {
+          error:
+            `Model "${model}" returned an empty response. ` +
+            `This model may not support structured output. ` +
+            `Try: meta-llama/llama-3.1-8b-instruct:free or google/gemini-2.0-flash-exp:free`,
+        },
         { status: 500 }
       );
     }
 
+    // Robustly extract JSON from the response:
+    // 1. Strip <think>…</think> blocks (DeepSeek R1, Nemotron, QwQ, etc.)
+    // 2. Strip markdown code fences  ```json … ```
+    // 3. Extract the first {...} JSON object if still not parseable
+    const extractJSON = (text: string): string => {
+      let s = text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+      s = s.replace(/^```(?:json)?\s*/m, "").replace(/\s*```\s*$/m, "").trim();
+      if (!s.startsWith("{")) {
+        const match = s.match(/\{[\s\S]*\}/);
+        if (match) s = match[0];
+      }
+      return s;
+    };
+
+    const cleaned = extractJSON(rawContent);
+
     let parsed: Partial<AnalysisResult>;
     try {
-      parsed = JSON.parse(raw) as Partial<AnalysisResult>;
+      parsed = JSON.parse(cleaned) as Partial<AnalysisResult>;
     } catch {
+      console.error("[InsightPilot] Could not parse AI response:", rawContent.slice(0, 500));
       return NextResponse.json(
-        { error: "AI response was not valid JSON. Please try again." },
+        {
+          error:
+            `Model "${model}" did not return valid JSON. ` +
+            `Try a model with better instruction-following: ` +
+            `meta-llama/llama-3.1-8b-instruct:free or google/gemini-2.0-flash-exp:free`,
+        },
         { status: 500 }
       );
     }
@@ -172,7 +219,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error:
-            "AI response did not match expected format. Please try again.",
+            "AI response was missing required fields (need 3 insights, 2 risks, 1 action). " +
+            "Try a stronger model: meta-llama/llama-3.3-70b-instruct:free",
         },
         { status: 500 }
       );
