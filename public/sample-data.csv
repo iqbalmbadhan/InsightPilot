@@ -1,0 +1,34 @@
+Date,Customer,Product,Rep,Amount,Region,Status,Units,Notes
+01/05/2024,Acme Corp,Widget Pro,Sarah J.,$12400,North,Closed,124,Top customer Q1
+01/08/2024,TechStart Inc,Basic Plan,Mike T.,$3200,East,Closed,32,
+01/12/2024,GlobalTech,Widget Pro,Sarah J.,$8900,North,Closed,89,Rush order
+01/15/2024,,Premium Suite,Bob K.,$15600,West,Closed,52,Fortune 500 account
+01/18/2024,Acme Corp,Basic Plan,Sarah J.,$2800,North,Closed,28,
+01/22/2024,RetailMax,Widget Pro,Mike T.,9100,East,Closed,91,Repeat buyer
+01/25/2024,TechStart Inc,Premium Suite,Bob K.,$7800,East,Pending,26,Awaiting signature
+02/01/2024,Acme Corp,Widget Pro,Sarah J.,$11200,North,Closed,112,
+02/05/2024,MegaCorp,Basic Plan,Tom R.,$1200,South,Lost,12,Price sensitivity cited
+02/08/2024,GlobalTech,Premium Suite,Sarah J.,$19800,North,Closed,66,
+02/12/2024,RetailMax,Basic Plan,Mike T.,$2100,East,Closed,21,
+02/15/2024,Acme Corp,Widget Pro,Sarah J.,$13600,North,Closed,136,Strong repeat order
+02/19/2024,QuickBiz,Basic Plan,Tom R.,$800,South,Lost,8,Chose competitor
+02/22/2024,,Widget Pro,Bob K.,$9400,West,Closed,94,
+02/26/2024,TechStart Inc,Widget Pro,Mike T.,$4100,East,Closed,41,
+03/01/2024,Acme Corp,Premium Suite,Sarah J.,$24000,North,Closed,80,New product upsell
+03/05/2024,MegaCorp,Widget Pro,Tom R.,$1800,South,Pending,18,Long approval cycle
+03/08/2024,GlobalTech,Basic Plan,Sarah J.,$3600,North,Closed,36,
+03/12/2024,RetailMax,Premium Suite,Mike T.,$11400,East,Closed,38,
+03/15/2024,Acme Corp,Widget Pro,Sarah J.,$14100,North,Closed,141,Best single order
+03/19/2024,QuickBiz,Widget Pro,Tom R.,$2200,South,Closed,22,
+03/22/2024,TechStart Inc,Premium Suite,Bob K.,$9600,East,Pending,32,Budget approval delay
+03/26/2024,NewCo,Basic Plan,Tom R.,$600,South,Lost,6,Went with free tier
+03/29/2024,,Widget Pro,Sarah J.,$7800,North,Closed,78,
+04/02/2024,Acme Corp,Premium Suite,Sarah J.,$27200,North,Closed,88,Largest deal YTD
+04/05/2024,MegaCorp,Basic Plan,Tom R.,$900,South,Lost,9,Third lost deal this quarter
+04/09/2024,GlobalTech,Widget Pro,Bob K.,$10300,West,Closed,103,
+04/12/2024,RetailMax,Basic Plan,Mike T.,$1800,East,Closed,18,Smaller order than usual
+04/16/2024,Acme Corp,Widget Pro,Sarah J.,$12900,North,Closed,129,
+04/19/2024,TechStart Inc,Basic Plan,Mike T.,$2400,East,Closed,24,
+04/23/2024,QuickBiz,Premium Suite,Tom R.,$3800,South,Pending,13,Needs board approval
+04/26/2024,,Widget Pro,Bob K.,$8200,West,Closed,82,
+04/30/2024,Acme Corp,Premium Suite,Sarah J.,$28500,North,Closed,95,Record revenue month
