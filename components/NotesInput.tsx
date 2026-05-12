@@ -39,7 +39,9 @@ Example:
         />
         <div
           className={`absolute bottom-2 right-2.5 font-mono text-[10px] transition-colors ${
-            isNearLimit ? "text-amber-500" : "text-zinc-600"
+            isNearLimit
+              ? "text-amber-600 dark:text-amber-500"
+              : "text-zinc-400 dark:text-zinc-600"
           }`}
         >
           {remaining.toLocaleString()} left
@@ -49,7 +51,7 @@ Example:
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           {value.length > 0 && (
-            <span className="flex items-center gap-1 font-mono text-[11px] text-zinc-500">
+            <span className="flex items-center gap-1 font-mono text-[11px] text-zinc-400 dark:text-zinc-500">
               <FileText className="h-3 w-3" />
               {value.length.toLocaleString()} chars
             </span>
@@ -59,7 +61,7 @@ Example:
           variant="ghost"
           size="sm"
           onClick={onLoadExample}
-          className="font-mono text-xs text-zinc-500 hover:text-zinc-300"
+          className="font-mono text-xs"
         >
           Load example notes
         </Button>

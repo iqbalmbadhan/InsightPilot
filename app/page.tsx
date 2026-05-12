@@ -10,12 +10,11 @@ import AnalyzeButton from "@/components/AnalyzeButton";
 import LoadingState from "@/components/LoadingState";
 import EmptyState from "@/components/EmptyState";
 import ResultsDashboard from "@/components/ResultsDashboard";
-import { parseCSVFile } from "@/lib/parseData";
+import { parseCSVFile, serializeForPrompt } from "@/lib/parseData";
 import { saveSession, loadSession } from "@/lib/storage";
-import { serializeForPrompt } from "@/lib/parseData";
 import type { ParsedData, AnalysisResult } from "@/types";
 
-// ─── Example data ─────────────────────────────────────────────────────────────
+// ─── Example notes ─────────────────────────────────────────────────────────────
 
 const EXAMPLE_NOTES = `Q2 Sales Review — Internal Notes (messy draft)
 
@@ -61,7 +60,8 @@ export default function Home() {
     }
   }, []);
 
-  const canAnalyze = (parsedData !== null || rawText.trim().length > 20) && !isAnalyzing;
+  const canAnalyze =
+    (parsedData !== null || rawText.trim().length > 20) && !isAnalyzing;
 
   const handleAnalyze = useCallback(async () => {
     if (!canAnalyze) return;
@@ -75,25 +75,21 @@ export default function Home() {
       const response = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          parsedData,
-          rawText,
-          serialized,
-        }),
+        body: JSON.stringify({ parsedData, rawText, serialized }),
       });
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        throw new Error(
-          errData.error ?? `Request failed (${response.status})`
-        );
+        throw new Error(errData.error ?? `Request failed (${response.status})`);
       }
 
       const data = (await response.json()) as AnalysisResult;
       setResult(data);
       saveSession(data, parsedData?.summary, parsedData?.fileName);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Analysis failed. Please try again.");
+      setError(
+        err instanceof Error ? err.message : "Analysis failed. Please try again."
+      );
     } finally {
       setIsAnalyzing(false);
     }
@@ -111,7 +107,9 @@ export default function Home() {
       const res = await fetch("/sample-data.csv");
       const text = await res.text();
       const blob = new Blob([text], { type: "text/csv" });
-      const file = new File([blob], "sample-sales-data.csv", { type: "text/csv" });
+      const file = new File([blob], "sample-sales-data.csv", {
+        type: "text/csv",
+      });
       const parsed = await parseCSVFile(file);
       setParsedData(parsed);
       setRawText("");
@@ -128,17 +126,18 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-200">
       <Header />
 
       <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         {/* Hero text */}
         <div className="mb-8 space-y-1">
-          <h1 className="font-mono text-2xl font-bold tracking-tight text-zinc-100 sm:text-3xl">
+          <h1 className="font-mono text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-3xl">
             A tiny AI analyst for messy operations.
           </h1>
           <p className="font-mono text-sm text-zinc-500">
-            Upload a CSV / Excel file or paste notes → get 3 insights, 2 risks, 1 action.
+            Upload a CSV / Excel file or paste notes → get 3 insights, 2 risks,
+            1 action.
           </p>
         </div>
 
@@ -187,12 +186,14 @@ export default function Home() {
 
             {/* Error banner */}
             {error && (
-              <div className="flex items-start gap-2.5 rounded-lg border border-red-900/40 bg-red-900/10 px-3.5 py-3">
-                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
-                <p className="flex-1 font-mono text-xs text-red-300 leading-relaxed">{error}</p>
+              <div className="flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 px-3.5 py-3 dark:border-red-900/40 dark:bg-red-900/10">
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500 dark:text-red-400" />
+                <p className="flex-1 font-mono text-xs text-red-700 leading-relaxed dark:text-red-300">
+                  {error}
+                </p>
                 <button
                   onClick={() => setError(null)}
-                  className="text-red-500 hover:text-red-300"
+                  className="text-red-400 hover:text-red-600 dark:hover:text-red-300"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
@@ -208,7 +209,7 @@ export default function Home() {
 
             {/* Hint */}
             {!parsedData && !rawText && (
-              <p className="text-center font-mono text-[11px] text-zinc-600">
+              <p className="text-center font-mono text-[11px] text-zinc-400 dark:text-zinc-600">
                 No API key? The app runs in demo mode with a sample response.
               </p>
             )}
@@ -227,7 +228,7 @@ export default function Home() {
           />
         )}
 
-        {/* Empty state — shown when no result, not loading, not inputting */}
+        {/* Empty state */}
         {!isAnalyzing && !result && !parsedData && !rawText && (
           <div className="mt-8">
             <EmptyState />
@@ -236,10 +237,11 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-zinc-900 py-6">
+      <footer className="mt-16 border-t border-zinc-200 py-6 dark:border-zinc-900">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <p className="text-center font-mono text-[11px] text-zinc-700">
-            InsightPilot · AI-powered business intelligence · Data never leaves your browser except for AI analysis
+          <p className="text-center font-mono text-[11px] text-zinc-400 dark:text-zinc-700">
+            InsightPilot · AI-powered business intelligence · Data never leaves
+            your browser except for AI analysis
           </p>
         </div>
       </footer>

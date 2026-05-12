@@ -33,7 +33,8 @@ interface ActionCardProps {
 }
 
 export default function ActionCard({ action, delay = 0 }: ActionCardProps) {
-  const config = PRIORITY_CONFIG[action.priority] ?? PRIORITY_CONFIG["this-week"];
+  const config =
+    PRIORITY_CONFIG[action.priority] ?? PRIORITY_CONFIG["this-week"];
 
   return (
     <motion.div
@@ -41,16 +42,16 @@ export default function ActionCard({ action, delay = 0 }: ActionCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay }}
     >
-      <Card className="border-blue-900/40 bg-blue-950/10 hover:border-blue-800/50 transition-colors">
+      <Card className="border-blue-200 bg-blue-50/50 hover:border-blue-300 transition-colors dark:border-blue-900/40 dark:bg-blue-950/10 dark:hover:border-blue-800/50">
         <CardContent className="p-5">
           <div className="space-y-3">
             {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-900/40 border border-blue-700/40">
-                  <ArrowRight className="h-3.5 w-3.5 text-blue-400" />
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-300 bg-blue-100 dark:border-blue-700/40 dark:bg-blue-900/40">
+                  <ArrowRight className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                 </div>
-                <span className="font-mono text-xs font-semibold text-blue-300 uppercase tracking-wide">
+                <span className="font-mono text-xs font-semibold text-blue-700 uppercase tracking-wide dark:text-blue-300">
                   Recommended Action
                 </span>
               </div>
@@ -61,14 +62,14 @@ export default function ActionCard({ action, delay = 0 }: ActionCardProps) {
             </div>
 
             {/* Action text */}
-            <p className="text-sm font-medium leading-relaxed text-zinc-100 pl-8">
+            <p className="text-sm font-medium leading-relaxed text-zinc-900 pl-8 dark:text-zinc-100">
               {action.text}
             </p>
 
             {/* Rationale */}
-            <div className="pl-8 border-l-2 border-blue-900/50">
-              <p className="font-mono text-xs text-zinc-500 leading-relaxed">
-                <span className="text-zinc-600">why → </span>
+            <div className="pl-8 border-l-2 border-blue-200 dark:border-blue-900/50">
+              <p className="font-mono text-xs text-zinc-500 leading-relaxed dark:text-zinc-500">
+                <span className="text-zinc-400 dark:text-zinc-600">why → </span>
                 {action.rationale}
               </p>
             </div>

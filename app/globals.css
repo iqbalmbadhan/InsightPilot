@@ -3,7 +3,22 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Light mode (default) ─────────────────────────────────────── */
   :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --border: 0 0% 89%;
+    --ring: 0 0% 9%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 144 100% 5%;
+  }
+
+  /* ── Dark mode ────────────────────────────────────────────────── */
+  .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 7%;
@@ -15,19 +30,6 @@
     --primary: 142 71% 45%;
     --primary-foreground: 144 100% 5%;
   }
-
-  .light {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --border: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --primary: 142 71% 45%;
-    --primary-foreground: 0 0% 98%;
-  }
 }
 
 @layer base {
@@ -36,12 +38,12 @@
   }
 
   body {
-    @apply bg-zinc-950 text-zinc-100 antialiased;
+    @apply bg-white text-zinc-900 antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  .light body {
-    @apply bg-zinc-50 text-zinc-900;
+  .dark body {
+    @apply bg-zinc-950 text-zinc-100;
   }
 
   /* Custom scrollbar */
@@ -50,18 +52,28 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
+    @apply bg-zinc-100;
+  }
+  .dark ::-webkit-scrollbar-track {
     @apply bg-zinc-950;
   }
   ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300 rounded-full;
+  }
+  .dark ::-webkit-scrollbar-thumb {
     @apply bg-zinc-700 rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-400;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
     @apply bg-zinc-600;
   }
 }
 
 @layer utilities {
   .font-mono {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas,
+      "Liberation Mono", Menlo, monospace;
   }
 }
