@@ -244,6 +244,21 @@ export async function POST(req: NextRequest) {
     if (err instanceof OpenAI.APIError) {
       const model = resolveModel();
 
+      if (err.status === 404) {
+        return NextResponse.json(
+          {
+            error:
+              `Model "${model}" was not found on OpenRouter (404). ` +
+              `It may have been retired or the ID is wrong. ` +
+              `Reliable free alternatives: ` +
+              `meta-llama/llama-3.3-70b-instruct:free · ` +
+              `meta-llama/llama-3.1-8b-instruct:free · ` +
+              `mistralai/mistral-7b-instruct:free`,
+          },
+          { status: 404 }
+        );
+      }
+
       if (err.status === 400) {
         // Most common cause: invalid model ID (especially with OpenRouter)
         const isModelError =
