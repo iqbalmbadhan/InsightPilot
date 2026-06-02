@@ -277,7 +277,3 @@ Key signals: Acme Corp concentration (~38%), Sarah J. top performer, South regio
 Key signals: Basic Handle Kit stockout in May (after 3 months of warning signals), Widget Pro X200 return spike in February, Premium Case A1 return rate accelerating.
 
 ---
-
-## License
-
-MIT
